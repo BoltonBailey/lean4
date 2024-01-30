@@ -50,7 +50,7 @@ def getExpectedNumArgs (e : Expr) : MetaM Nat := do
   pure numArgs
 
 private def throwApplyError {α} (mvarId : MVarId) (eType : Expr) (targetType : Expr) : MetaM α :=
-  throwTacticEx `apply mvarId m!"failed to unify{indentExpr eType}\nwith{indentExpr targetType}"
+  throwTacticEx `apply mvarId m!"failed to unify{indentExpr eType}\nwith{indentExpr targetType}\nIf these terms seem like they should unify, it is possible that implicit arguments do not match. You can try using set_option pp.explicit true to see any differences."
 
 def synthAppInstances (tacticName : Name) (mvarId : MVarId) (newMVars : Array Expr) (binderInfos : Array BinderInfo)
     (synthAssignedInstances : Bool) (allowSynthFailures : Bool) : MetaM Unit :=
